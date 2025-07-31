@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	   xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/data/mongo
+		http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+	<!-- JPA Repository 스캔 -->		
+	<jpa:repositories base-package="egovframework.liveapi.conference.content.repository" />
+	<jpa:repositories base-package="egovframework.liveapi.conference.contentlive.repository" />
+	<jpa:repositories base-package="egovframework.liveapi.conference.mic.repository" />
+	<jpa:repositories base-package="egovframework.liveapi.conference.room.repository" />
+	<jpa:repositories base-package="egovframework.liveapi.live.room.repository" />
+	<jpa:repositories base-package="egovframework.liveapi.live.mic.repository" />	
+	<!--   <jpa:repositories base-package="egovframework.liveapi.conference.repository" /> -->	
+	<!--  <jpa:repositories base-package="egovframework.liveapi.speech.repository" /> -->
+	
+	<!-- MongoRepository 등록 -->    
+	<mongo:repositories base-package="egovframework.liveapi.live.transcribe.repository" />
+	
+	<!-- JPA Entity 설정 -->
+	<bean id="entityManagerFactory"
+	      class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	    <property name="dataSource" ref="dataSource"/>
+	    <property name="packagesToScan" value="egovframework.liveapi" />
+	    <!--  <property name="packagesToScan" value="egovframework.liveapi.common.domain"/> -->
+	    <property name="jpaVendorAdapter">
+	        <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+	            <property name="generateDdl" value="true"/>
+	            <property name="showSql" value="true"/>
+	        </bean>
+	    </property>
+	</bean>
+</beans>
