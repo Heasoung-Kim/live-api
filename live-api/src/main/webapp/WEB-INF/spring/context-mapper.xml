@@ -12,12 +12,14 @@
 		http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
 	<!-- JPA Repository 스캔 -->		
-	<jpa:repositories base-package="egovframework.liveapi.conference.content.repository" />
-	<jpa:repositories base-package="egovframework.liveapi.conference.contentlive.repository" />
+	<!-- <jpa:repositories base-package="egovframework.liveapi.conference.content.repository" />
+	<jpa:repositories base-package="egovframework.liveapi.conference.contentlive.repository" /> -->
 	<jpa:repositories base-package="egovframework.liveapi.conference.mic.repository" />
 	<jpa:repositories base-package="egovframework.liveapi.conference.room.repository" />
+	
 	<jpa:repositories base-package="egovframework.liveapi.live.room.repository" />
-	<jpa:repositories base-package="egovframework.liveapi.live.mic.repository" />	
+	<jpa:repositories base-package="egovframework.liveapi.live.mic.repository" />
+	<jpa:repositories base-package="egovframework.liveapi.live.content.repository" />		
 	<!--   <jpa:repositories base-package="egovframework.liveapi.conference.repository" /> -->	
 	<!--  <jpa:repositories base-package="egovframework.liveapi.speech.repository" /> -->
 	

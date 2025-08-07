@@ -1,6 +1,8 @@
 package egovframework.liveapi.conference.mic.dto;
 
 
+import java.time.LocalDateTime;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,5 +21,6 @@ public class MicDto {
     private String name;
     private String status;
     private String position;
+    private LocalDateTime updatedAt;
 
 }

@@ -1,5 +1,6 @@
 package egovframework.liveapi.conference.mic.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,8 +25,8 @@ public class MicServiceImpl implements MicService {
     }
 
     @Override
-    public MicDto getMicById(Integer roomId, Integer id) {
-        Mic entity = micRepository.findByRoomIdAndId(roomId, id);
+    public MicDto getMicById(Integer roomId, Integer micId) {
+        Mic entity = micRepository.findByRoomIdAndMicId(roomId, micId);
         return micSettingMapper.toDto(entity);
     }
 
@@ -39,13 +40,22 @@ public class MicServiceImpl implements MicService {
 
     @Override
     public Integer updateMicId(MicDto dto) {
-        Mic mic = micSettingMapper.toEntity(dto);
-        micRepository.save(mic);
+        Mic entity = micRepository.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Mic not found"));
+        
+        Mic updated = entity.toBuilder()
+                .name(dto.getName())
+                .position(dto.getPosition())
+                .status(dto.getStatus())
+                .updatedAt(LocalDateTime.now())
+                .build();
+        
+        micRepository.save(updated);
         return 1;
     }
 
     @Override
-    public Integer removeRoomMicByMicId(Integer id) {
+    public Integer removeRoomMicById(Integer id) {
     	micRepository.deleteById(id);
         return 1;
     }

@@ -9,8 +9,9 @@ public interface RoomService {
 	List<RoomDto> getAllRooms();
 	RoomDto getRoomDetails(Integer id);
 	//String getRoomStatus(Integer id);
+	Integer softDeleteRoom(Integer id);
 	Integer createRoom(RoomDto dto);
 	Integer removeRoom(Integer id);
-	Integer updateRoomById(Integer id, RoomDto dto);
+	Integer updateRoomById(RoomDto dto);
 
 }

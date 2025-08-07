@@ -3,11 +3,7 @@ package egovframework.liveapi.live.mic.controller;
 import java.util.List;
 
 import egovframework.liveapi.live.mic.dto.LiveMicDto;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import egovframework.liveapi.live.mic.service.LiveMicService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +32,12 @@ public class LiveMicController {
 	@GetMapping("/{roomId}/{micId}")
     public LiveMicDto getMicById(@PathVariable("roomId") Integer roomId, @PathVariable("micId") int id) {
         return liveMicService.getMicById(roomId, id);
+    }
+	
+	/** 회의장 마이크 등록  */
+	@PutMapping
+    public Integer createRoomMic(@RequestBody LiveMicDto dto) {
+        return liveMicService.createRoomMic(dto);
     }
 
     /** 회의장 마이크 정보 단건삭제 */

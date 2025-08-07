@@ -1,5 +1,6 @@
 package egovframework.liveapi.conference.room.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -29,15 +30,6 @@ public class RoomServiceImpl implements RoomService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회의장이 없습니다: " + id));
         return roomMapper.toDto(room);
     }
-
-    /**
-    @Override
-    public String getRoomStatus(Integer id) {
-        Room room = roomRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회의장이 없습니다: " + id));
-        return room.getStatus();
-    }
-     */
     
     @Override
     public Integer createRoom(RoomDto dto) {
@@ -47,18 +39,41 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Integer removeRoom(Integer id) {
-        roomRepository.deleteById(id);
+    public Integer softDeleteRoom(Integer id) {
+        Room entity = roomRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회의장이 없습니다"));
+
+        Room updated = entity.toBuilder()
+        		.isDeleted(true)
+                .deleteAt(LocalDateTime.now())
+                .build();
+        
+        // 기타 필요한 필드들...
+        roomRepository.save(updated);
         return 1;
     }
-
+    
+    
     @Override
-    public Integer updateRoomById(Integer id, RoomDto dto) {
-        //Room room = roomRepository.findById(id)
-        //        .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회의장이 없습니다: " + id));
+    public Integer updateRoomById(RoomDto dto) {
+        Room existing = roomRepository.findById(dto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회의장이 없습니다"));
 
+        Room updated = existing.toBuilder()
+                .name(dto.getName())
+                .position(dto.getPosition())
+                .status(dto.getStatus())
+                .updateAt(LocalDateTime.now())
+                .build();
+        
         // 기타 필요한 필드들...
-        //roomMapper.updateFromDto(dto, room);
+        roomRepository.save(updated);
+        return 1;
+    }
+    
+    @Override
+    public Integer removeRoom(Integer id) {
+        roomRepository.deleteById(id);
         return 1;
     }
 }

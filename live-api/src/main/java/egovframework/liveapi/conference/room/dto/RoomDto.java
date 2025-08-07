@@ -15,10 +15,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RoomDto {
 	
-    private Long id;
+    private Integer id;
+    private Integer roomId;
+    
     private String name;
     private String status;
+    private String position;
     private String description;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    
+    private Boolean isDeleted;
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
+    private LocalDateTime deleteAt;
 }

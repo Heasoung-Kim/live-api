@@ -28,7 +28,6 @@ public class LiveContentDto {
     private String contentId;
     private String errorMessage;
     private boolean isDeleted;
-    private boolean isActive;
     private int liveDuration;
     private LocalDateTime liveStartTime;     // ✅ 실제 시작시간
     private LocalDateTime meetingEndTime;    // ✅ 예약 종료시간

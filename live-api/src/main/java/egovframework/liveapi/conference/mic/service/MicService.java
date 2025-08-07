@@ -7,9 +7,9 @@ import egovframework.liveapi.conference.mic.dto.MicDto;
 public interface MicService {
 
 	List<MicDto> getRoomMics(Integer roomId);
-	MicDto getMicById(Integer roomId, Integer id);
+	MicDto getMicById(Integer roomId, Integer micId);
 	Integer createRoomMic(MicDto dto);
 	Integer updateMicId(MicDto dto);
-	Integer removeRoomMicByMicId(Integer id);
+	Integer removeRoomMicById(Integer id);
 
 }

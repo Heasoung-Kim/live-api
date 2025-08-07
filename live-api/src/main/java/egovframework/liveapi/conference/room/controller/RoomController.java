@@ -35,20 +35,27 @@ public class RoomController {
     }
 
     /** 회의장 생성  */
-    @PutMapping("/{roomId}")
+    @PutMapping
     public Integer createRoom(@RequestBody RoomDto dto) {
         return roomService.createRoom(dto);
     }
-
-    /** 회의장 삭제  */
-    @DeleteMapping("/{roomId}")
-    public Integer removeRoom(@PathVariable Integer roomId) {
-        return roomService.removeRoom(roomId);
+    
+    /** 회의장 상태 사용 안함  */
+    @PatchMapping("/{id}/{roomId}")
+    public Integer softDeleteRoom(@PathVariable Integer id, @RequestBody RoomDto dto) {
+        return roomService.softDeleteRoom(id);
     }
 
     /** 회의장 정보 수정 */
-    @PatchMapping("/{roomId}")
-    public Integer updateRoomById(@PathVariable Integer roomId, @RequestBody RoomDto dto) {
-        return roomService.updateRoomById(roomId, dto);
+    @PatchMapping
+    public Integer updateRoomById(@RequestBody RoomDto dto) {
+        return roomService.updateRoomById(dto);
     }
+    
+    /** 회의장 삭제  */
+    @DeleteMapping("/{id}")
+    public Integer removeRoom(@PathVariable Integer id) {
+        return roomService.removeRoom(id);
+    }
+
 }

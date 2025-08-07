@@ -1,21 +1,17 @@
 package egovframework.liveapi.conference.mic.domain;
 
 import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import lombok.Builder;
-import lombok.Getter;
+import javax.persistence.*;
+import org.hibernate.annotations.DynamicUpdate;
+import lombok.*;
 
 @Entity
 @Table(name = "mic")
 @Getter
-@Builder
+@Builder(toBuilder = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@DynamicUpdate
 public class Mic {
 
     @Id
@@ -36,5 +32,14 @@ public class Mic {
     private LocalDateTime updatedAt;
 
     private LocalDateTime createdAt;
-
+    
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

@@ -11,11 +11,8 @@ import egovframework.liveapi.conference.mic.domain.Mic;
 public interface MicRepository extends JpaRepository<Mic, Integer> {
 
 	  List<Mic> findAllByRoomId(Integer roomId);
-	  Mic findByRoomIdAndId(Integer roomId, Integer id);
-	  //int createRoomMic(Mic mic);
-	  //int save(Mic mic);
+	  Mic findByRoomIdAndMicId(Integer roomId, Integer micId);
 	  Integer removeRoomMicById(Integer id);
-	  @Override
-	void deleteById(Integer id);
+	  void deleteById(Integer id);
 
 }

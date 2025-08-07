@@ -36,7 +36,7 @@ public class LiveRoomController {
 
 
     /** 회의장 생성  */
-    @PutMapping("/{roomId}")
+    @PutMapping
     public Integer createRoom(@RequestBody LiveRoomDto dto) {
         return liveRoomService.createRoom(dto);
     }

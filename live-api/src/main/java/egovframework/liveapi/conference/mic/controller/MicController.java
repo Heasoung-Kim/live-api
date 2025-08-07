@@ -1,5 +1,6 @@
 package egovframework.liveapi.conference.mic.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,31 +37,33 @@ public class MicController {
 
 	/** 회의장 마이크 상세정보  */
 	@GetMapping("/{roomId}/{micId}")
-    public MicDto getMicById(@PathVariable("roomId") Integer roomId, @PathVariable("micId") int id) {
-        return micService.getMicById(roomId, id);
+    public MicDto getMicById(@PathVariable("roomId") Integer roomId, @PathVariable("micId") int micId) {
+        return micService.getMicById(roomId, micId);
     }
 
 	/** 회의장 마이크 등록  */
-	@PutMapping("/{roomId}/{micId}")
-    public Integer createRoomMics(@RequestBody MicDto dto) {
+	@PutMapping
+    public Integer createRoomMic(@RequestBody MicDto dto) {
         return micService.createRoomMic(dto);
     }
 
     /** 회의장 마이크 정보 수정 */
-    @PatchMapping("/{roomId}/{micId}")
-    public Integer updateRoomMicById(@PathVariable Integer roomId, @PathVariable Integer id, @RequestBody MicDto dto) {
+    @PatchMapping
+    public Integer updateRoomMicById(@RequestBody MicDto dto) {
     	
     	MicDto updatedDto = dto.toBuilder()
-    		    .roomId(roomId)
-    		    .id(id)
+    			.id(dto.getId())
+    		    .name(dto.getName())
+    		    .position(dto.getPosition())
+    		    .updatedAt(LocalDateTime.now())
     		    .build();
     		
     	return micService.updateMicId(updatedDto);
     }
 
     /** 회의장 마이크 정보 단건삭제 */
-    @DeleteMapping("/{roomId}/{micId}")
-    public Integer removeRoomMicByMicId(@PathVariable Integer micId) {
-        return micService.removeRoomMicByMicId(micId);
+    @DeleteMapping("/{id}")
+    public Integer removeRoomMicByMicId(@PathVariable Integer id) {
+        return micService.removeRoomMicById(id);
     }
 }

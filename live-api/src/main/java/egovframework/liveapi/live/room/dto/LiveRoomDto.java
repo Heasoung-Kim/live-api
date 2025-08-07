@@ -2,27 +2,27 @@ package egovframework.liveapi.live.room.dto;
 
 import java.time.LocalDateTime;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Setter
-@Builder
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LiveRoomDto {
-    private String id;
-    private Long roomId;
-    private Long contentId;
-    private String micId;
-    private String micName;
-    private String micIp;
-    private Integer speakerId;
+    private Integer id;
+    private Integer roomId;
+    private String status;    
+    private String errorCode;
     private Boolean connected;
-    private String position;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
-    private Boolean isDeleted;
+    private String contentId;   
     private String description;
-    private String name;
-    private String status;
+    private Boolean isDeleted;
+    private LocalDateTime createAt;
+    private LocalDateTime liveStartTime;
+    private LocalDateTime liveEndTime;
+    private LocalDateTime updateAt;
 }
